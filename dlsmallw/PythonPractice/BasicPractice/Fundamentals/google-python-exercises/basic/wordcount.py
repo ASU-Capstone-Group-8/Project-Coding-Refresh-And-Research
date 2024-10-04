@@ -45,6 +45,34 @@ import sys
 # and builds and returns a word/count dict for it.
 # Then print_words() and print_top() can just call the utility function.
 
+def helper(filename):
+    newFile = open(filename, 'r')
+    wordDict = {}
+    with newFile:
+      for line in newFile.readlines():
+        lineWords = line.rstrip().split(' ')
+        for word in lineWords:
+          if len(word) > 0:
+            word_lower = word.lower()
+            wordDict.setdefault(word_lower, 0)
+            wordDict[word_lower] += 1
+    newFile.close()
+    return wordDict
+
+def print_words(filename):
+  try:
+    wordDict = helper(filename)
+    print(wordDict)
+  except IOError:
+    print('File not found!')
+
+def print_top(filename):
+  try:
+    wordDict = helper(filename)
+    print(dict(list(sorted(wordDict.items(), key=lambda item: item[1], reverse=reversed))[:20]))
+  except IOError:
+    print('File not found!')
+
 ###
 
 # This basic command line argument parsing code is provided and
