@@ -42,19 +42,59 @@ columns, so the output looks better.
 """
 
 import random
+import string
 import sys
 
 
 def mimic_dict(filename):
   """Returns mimic dict mapping each word to list of words which follow it."""
-  # +++your code here+++
-  return
+  mimic = {}
 
+  try:
+    fo = open(filename, 'r')
+    with fo:
+      all_words = fo.read().replace('\n', ' ').replace('-', '').split()
+    fo.close()
+
+    prev = ''
+
+    for word in all_words:
+      if (prev != ''):
+        prev = prev.lower()
+
+      mimic.setdefault(prev, [])
+      if word not in mimic[prev]:
+        mimic[prev].append(word)
+      prev = word
+
+    return mimic
+  except FileNotFoundError:
+    print('File does not exist!')
 
 def print_mimic(mimic_dict, word):
   """Given mimic dict and start word, prints 200 random words."""
-  # +++your code here+++
-  return
+  line = ''
+  lineArr = []
+
+  for i in range(200):
+    if word != '':
+      word = word.lower()
+
+    choices = mimic_dict.get(word.lower())
+
+    if choices:
+      next_word = random.choice(choices)
+      line += ' ' + next_word
+      word = next_word
+    else:
+      word = ''
+
+    if len(line) >= 70:
+      line += '\n'
+      lineArr.append(line)
+      line = ''
+
+  print(''.join(lineArr))
 
 
 # Provided main(), calls mimic_dict() and mimic()
