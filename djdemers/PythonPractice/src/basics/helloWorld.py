@@ -1,4 +1,7 @@
 # src/basics/helloWorld.py
+import sys
+
+
 
 # This defines the main function of the program.
 # A function in Python is defined using the "def" keyword, followed by the function name and parentheses.
@@ -9,6 +12,7 @@ def main():
     # In this case, the message "Hello, World!" is being passed as an argument to the print function.
     # When executed, this will display the text "Hello, World!" in the console.
     print("Hello, World!")
+    sys.exit(0) # Exit the program after printing
 
 # This part checks if the Python script is being run directly (not imported as a module).
 # "__name__" is a special built-in variable in Python that holds the name of the module currently being executed.
