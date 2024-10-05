@@ -44,18 +44,25 @@ class Rational:
         return self
 
     def __pow__(self, power):
-        if(pow > 0):
-            self.numer = math.pow(self.numer, power)
-            self.denom = math.pow(self.denom, power)
-            #self.sanify()
-        elif(pow < 0):
-            self.numer = math.pow(self.denom, power)
-            self.denom = math.pow(self.numer, power)
+        
+        if(power > 0):
+            self.numer = int(math.pow(self.numer, power))
+            self.denom = int(math.pow(self.denom, power))
+
+        elif(power < 0):
+            temp = self.numer
+            self.numer = int(math.pow(self.denom, -1 * power))
+            self.denom = int(math.pow(temp, -1 * power))
         else:
-            return 1
+            self.numer = 1
+            self.denom = 1
+        self.sanify()
+        return self
 
     def __rpow__(self, base):
-        pass
+        temp = base ^ self.numer
+        temp2 = 1.0 / self.denom
+        return temp ** temp2
 
     def sanify(self):
         self.fixNegative();
