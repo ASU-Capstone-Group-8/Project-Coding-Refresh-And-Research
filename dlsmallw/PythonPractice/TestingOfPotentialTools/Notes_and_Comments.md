@@ -17,3 +17,6 @@ and then using the discovered class/id names for the data we are targeting, and 
 This would work relatively well with Argilla, which would take the scraped data, and provide the means of labeling the data.
 All that would be necessary, would be to build a web application that can scrape the data into a convenient location, and 
 then set up argilla to pull the scraped data and make it available for annotation. 
+
+### Note:
+I did spend some time relearning how Python classes work, and how to make use of attribute access privileges.
