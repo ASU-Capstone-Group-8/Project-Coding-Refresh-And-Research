@@ -1,8 +1,10 @@
+# Test for Hello World!
 # tests/test_helloWorld.py
 
+import sys
 import unittest
 from io import StringIO
-import sys
+
 from basics.helloWorld import main
 
 
