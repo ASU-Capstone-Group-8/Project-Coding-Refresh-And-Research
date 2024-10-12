@@ -62,6 +62,35 @@ Date: 11 October 2024
    - Can use something like docker or kubernetes to containerize the model with all of the necessary tools, programs and dependencies
    - Makes it so that the model can be deployed to pretty much any machine/environment and still work without preconfiguring it
 
+ - Quick and Dirty Options for Inference (serving the model to an app):
+   - Pinferencia:
+     - https://github.com/underneathall/pinferencia/tree/main/docs/get-started
+     - Offers a really simple backend with GUI that can readily handle any model
+     - One concern is that it was last updated 2 years ago, so it may be deprecated at this point
+   - Gradio:
+     - https://www.gradio.app/docs
+     - Well known in the AI/ML industry for providing a quick and easy webapp UI for deployed AI models
+     - UI is built by using attributes within the initialization of the Gradio UI
+       - i.e., you can specify the input as a 'textbox' and the output as a 'textbox' and it will generate two textboxes side by side
+       - https://www.gradio.app/playground
+   - FastAPI:
+     - Maybe a backend option if we want to build the frontend from scratch
+     - https://fastapi.tiangolo.com/features/
+     - Generally seems to be a quick way for setting up an API around the model
+     - Would likely need to containerize this with the model for deployment
+   - Streamlit:
+     - https://streamlit.io/
+     - Very similar to Gradio, providing a quick and easy UI for model inference
+     - Has a community where members can provide their own created components for use in the app
+       - https://streamlit.io/components?category=text
+   - Seldon.io:
+     - https://mlserver.readthedocs.io/en/latest/getting-started/index.html
+     - Offers an open-source MLServer which can be used for deploying a model
+     - Seems to just be a preconfigured ML server module, which you can plug in the model
+     - Also seems to support REST and gRPC api integration
+     - It is an option, but it may not be nearly as painfree as some other options
+     - 
+
 ### Current Expectations:
  - Based on the ease of use and streamlined services they provide, we will likely use KubeFlow for setting up the training pipeline
    - They provide specifically tailored components to manage every aspect of the pipeline, and also have service-tailored integrations with AWS, Azure, GCS, etc.
