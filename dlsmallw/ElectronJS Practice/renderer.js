@@ -1,7 +1,7 @@
 
 
 const nodeVersion = document.getElementById('node-version')
-nodeVersion.innerText = versions.node()
+nodeVersion.innerHTML = versions.node()
 
 const chromeVersion = document.getElementById('chrome-version')
 chromeVersion.innerHTML = versions.chrome()
