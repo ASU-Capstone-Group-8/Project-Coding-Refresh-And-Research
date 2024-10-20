@@ -1,12 +1,9 @@
-from sys import maxsize
-from sqlalchemy import *
-from sqlalchemy.ext.declarative import declarative_base
 import enum
-# This is a sample Python script.
+import os
+from datetime import datetime
+from sys import maxsize
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
+from sqlalchemy import *
 
 
 class StatusEnum(enum.Enum):
@@ -15,8 +12,26 @@ class StatusEnum(enum.Enum):
     error = 3
 
 
-# Press the green button in the gutter to run the script.
+def insert_website_data(site_url, site_name, site_status):
+    return Website_Data.insert().values(url=site_url, name=site_name, status=site_status)
+
+
+def insert_web_pages(page_website_id, page_title, page_content, page_url, page_last_scraped):
+    return Web_Pages.insert().values(website_id=page_website_id, title=page_title, content=page_content, url=page_url,
+                                     last_scraped=page_last_scraped)
+
+
+def insert_scraped_data(scraped_page_id, scraped_data):
+    return Scraped_Data.insert().values(page_id=scraped_page_id, data=scraped_data)
+
+
 if __name__ == '__main__':
+    databaseCreated = os.path.isfile('NLPDatabase.db')
+    if databaseCreated:
+        print('Database found.')
+    else:
+        print('Database not found, creating and initializing database now.')
+
     engine = create_engine('sqlite:///NLPDatabase.db', echo=True)
     meta = MetaData()
     Website_Data = Table(
@@ -45,8 +60,8 @@ if __name__ == '__main__':
     )
 
     meta.create_all(engine)
-    engine.connect()
-
-
-
-
+    conn = engine.connect()
+    conn.execute(insert_website_data('example url', 'Example website', StatusEnum.online))
+    conn.execute(insert_web_pages(1, 'example title', 'example content', 'example url', datetime.now()))
+    conn.execute(insert_scraped_data(1, 'example data'))
+    conn.commit()
