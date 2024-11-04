@@ -1,3 +1,0 @@
-# ElectronJS Research - Dan Smallwood
-
-## 
